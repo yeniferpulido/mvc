@@ -38,8 +38,31 @@ class Person  extends Entity{
         return$persons;
     }
 
-    public function save(){}
-    public function update(){}
-    public function delate(){}
+    public function save(){
+        $sql = "insert into personas (nombre, email, edad) values";
+        $sql .= "('" . $this->name . "','" . $this->email . "'," . $this->age . ")";
+        $conex = new ConexDB();
+        $resultDb = $conex->execSQL($sql);
+        $conex->close();
+        return $resultDb;
+    }
+    public function update(){
+        $sql = "update personas set ";
+        $sql .= "nombre='" .$this->name . "',";
+        $sql .= "email='" .$this->email . "',";
+        $sql .= "edad='" .$this->age . "' ";
+        $sql .= "where id=" .$this->id;
+        $conex = new ConexDB();
+        $resultDb = $conex->execSQL($sql);
+        $conex->close();
+        return $resultDb;
+    }
+    public function delate(){
+        $sql = "delete from personas where id=" .$this->id;
+        $conex = new ConexDB();
+        $resultDb = $conex->execSQL($sql);
+        $conex->close();
+        return $resultDb;
+    }
 }
 
